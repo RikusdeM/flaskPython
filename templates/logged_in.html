@@ -1,0 +1,221 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <!-- The above 3 meta tags *must* come first in the head; any other head content must come *after* these tags -->
+    <meta name="description" content="">
+    <meta name="author" content="">
+    <link rel="icon" href="../../favicon.ico">
+
+    <title>Dashboard Template for Bootstrap</title>
+
+    <!-- Bootstrap core CSS -->
+    <link href="../static/bootstrap-3.3.5-dist/css/bootstrap.min.css" rel="stylesheet">
+
+</head>
+
+<body>
+
+<nav class="navbar navbar-inverse navbar-fixed-top">
+    <div class="container-fluid">
+        <div class="navbar-header">
+            <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#navbar" aria-expanded="false" aria-controls="navbar">
+                <span class="sr-only">Toggle navigation</span>
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+            </button>
+            <a class="navbar-brand" href="#">Item catagories</a>
+        </div>
+        <div id="navbar" class="navbar-collapse collapse">
+            <ul class="nav navbar-nav navbar-right">
+                <li><a href="#basket" data-toggle="modal">Basket</a></li>
+                 {% if admin == True  %}
+                    <li><a href="/settings">Settings</a></li>
+                 {% endif %}
+                <li><a href="/logout">Logout</a></li>
+            </ul>
+            <form class="navbar-form navbar-right">
+                <input type="text" class="form-control" placeholder="Search...">
+            </form>
+        </div>
+    </div>
+</nav>
+
+<div class="modal fade">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+                <button type="button" class="close" data-dismiss="modal" aria-hidden="true">×</button>
+                <h4 class="modal-title">Modal title</h4>
+            </div>
+            <div class="modal-body">
+                <p>One fine body…</p>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+                <button type="button" class="btn btn-primary">Save changes</button>
+            </div>
+        </div><!-- /.modal-content -->
+    </div><!-- /.modal-dialog -->
+</div><!-- /.modal -->
+
+<div class="container-fluid">
+    <div class="row">
+        <div class="col-sm-3 col-md-2 sidebar">
+            <ul class="nav nav-sidebar">
+                <li class="active"><a href="#">Overview <span class="sr-only">(current)</span></a></li>
+                <li><a href="/login/jewelry">Jewelry</a></li>
+                <li><a href="/login/skirts">Skirts</a></li>
+                <li><a href="/login/pants">Pants</a></li>
+                <li><a href="/login/handbags">Handbags</a></li>
+                <li><a href="#">Accessories</a></li>
+                <li><a href="#">Crafts</a></li>
+            </ul>
+            <!--<ul class="nav nav-sidebar">-->
+                <!--<li><a href="">Nav item</a></li>-->
+                <!--<li><a href="">Nav item again</a></li>-->
+                <!--<li><a href="">One more nav</a></li>-->
+                <!--<li><a href="">Another nav item</a></li>-->
+                <!--<li><a href="">More navigation</a></li>-->
+            <!--</ul>-->
+            <!--<ul class="nav nav-sidebar">-->
+                <!--<li><a href="">Nav item again</a></li>-->
+                <!--<li><a href="">One more nav</a></li>-->
+                <!--<li><a href="">Another nav item</a></li>-->
+            <!--</ul>-->
+        </div>
+        <div class="col-sm-9 col-sm-offset-3 col-md-10 col-md-offset-2 main">
+            <h1 class="page-header">Dashboard</h1>
+
+            <div class="row placeholders">
+                <div class="col-xs-6 col-sm-3 placeholder">
+                    <img data-src="holder.js/200x200/auto/sky" class="img-responsive" alt="Generic placeholder thumbnail">
+                    <h4>Label</h4>
+                    <span class="text-muted">Something else</span>
+                </div>
+                <div class="col-xs-6 col-sm-3 placeholder">
+                    <img data-src="holder.js/200x200/auto/vine" class="img-responsive" alt="Generic placeholder thumbnail">
+                    <h4>Label</h4>
+                    <span class="text-muted">Something else</span>
+                </div>
+                <div class="col-xs-6 col-sm-3 placeholder">
+                    <img data-src="holder.js/200x200/auto/sky" class="img-responsive" alt="Generic placeholder thumbnail">
+                    <h4>Label</h4>
+                    <span class="text-muted">Something else</span>
+                </div>
+                <div class="col-xs-6 col-sm-3 placeholder">
+                    <img data-src="holder.js/200x200/auto/vine" class="img-responsive" alt="Generic placeholder thumbnail">
+                    <h4>Label</h4>
+                    <span class="text-muted">Something else</span>
+                </div>
+            </div>
+
+            <h2 class="sub-header">{{itemPics}}</h2>
+            <div class="table-responsive">
+                <table class="table table-striped">
+                    <thead>
+                        <th>Items</th>
+                    </thead>
+                    <tbody>
+                    {% set count = 0 %}
+                    {% for item in items %}
+                        {% if items[item].getCategory() == itemPics %}
+                            {% if count % 3 == 0 %} {# how many items there are in a row #}
+                                <tr> </tr>
+                            {% endif %}
+                            {% set count = count + 1 %} {# increment counter #}
+                            <td>
+                                <div class="media">
+                                    <div class="media-left">
+                                        <a href="/static/pictures/{{itemPics}}/{{items[item].getPicURL()}}">
+                                            <img class="media-object" src="/static/pictures/{{itemPics}}/{{items[item].getPicURL()}}" width="100">
+                                        </a>
+                                    </div>
+                                    <div class="media-body">
+                                        <h4 class="media-heading">{{items[item].getDesc()}}</h4>
+                                        <h5 class="media-heading">{{items[item].getPrice()}}</h5>
+
+
+                                        <form action= "/addToBasket/{{items[item].getCategory()}}/{{items[item].getItemId()}}" method="post" target="_parent">
+                                            <div class="btn-group" role="group">
+                                                <input class="btn btn-primary btn-md" type="submit" value="Submit" onclick="alert('Added to basket')">
+                                            </div>
+                                        </form>
+
+                                    </div>
+                                </div>
+                            </td>
+                        {% endif %}
+                    {% endfor %}
+                        <!--<td>1,015</td>-->
+                        <!--<td>sodales</td>-->
+                        <!--<td>ligula</td>-->
+                        <!--<td>in</td>-->
+                        <!--<td>libero</td>-->
+                    </tbody>
+                </table>
+            </div>
+        </div>
+    </div>
+</div>
+
+<div class="modal fade" id="basket">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+                <h4 class="modal-title">Basket</h4>
+            </div>
+            <div class="modal-body">
+                {% for basketItem in basket %}
+                    <div class="media">
+                        <div class="media-left">
+                            <a href="/static/pictures/{{items[basketItem[2]].getCategory()}}/{{items[basketItem[2]].getPicURL()}}">
+                                <img class="media-object" src="/static/pictures/{{items[basketItem[2]].getCategory()}}/{{items[basketItem[2]].getPicURL()}}" width="20">
+                            </a>
+                        </div>
+                        <div class="media-body">
+                            <h4 class="media-heading">{{items[basketItem[2]].getDesc()}}</h4>
+                            <h5 class="media-heading">{{items[basketItem[2]].getPrice()}}</h5>
+                         </div>
+                        <div class="media-right">
+                            <form action= "/removeFromBasket/{{items[basketItem[2]].getCategory()}}/{{items[basketItem[2]].getItemId()}}" method="post" target="_parent">
+                                <div class="btn-group" role="group">
+                                    <input class="btn btn-primary btn-xs" type="submit" value="Remove from basket" onclick="alert('Removed from basket')">
+                                </div>
+                            </form>
+                        </div>
+                    </div>
+                {% endfor %}
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+                <form action= "/checkOut" method="get" target="_parent">
+                    <div class="btn-group" role="group">
+                        <input class="btn btn-primary" type="submit" value="Check Out">
+                    </div>
+                </form>
+{#                <button type="button" class="btn btn-primary">Check Out</button>#}
+            </div>
+        </div><!-- /.modal-content -->
+    </div><!-- /.modal-dialog -->
+</div><!-- /.modal -->
+
+<!-- Bootstrap core JavaScript
+================================================== -->
+<!-- Placed at the end of the document so the pages load faster -->
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.3/jquery.min.js"></script>
+<script src="../static/bootstrap-3.3.5-dist/js/bootstrap.min.js"></script>
+
+</body>
+</html>
+
+<!--{% extends "bootstrap/base.html" %}-->
+<!--{% block title %}This is an example page{% endblock title %}-->
+
+<!--{% block main %}-->
+<!--<h2>This is a child template.</h2>-->
+<!--{% endblock main %}-->

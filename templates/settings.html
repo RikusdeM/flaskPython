@@ -1,0 +1,57 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.2/jquery.min.js"></script>
+    <script src="http://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/js/bootstrap.min.js"></script>
+    <meta charset="UTF-8">
+    <title></title>
+    <h1>Hello this the settings page where db edits can be made</h1>
+
+    <!-- Bootstrap core CSS -->
+    <link href="../static/bootstrap-3.3.5-dist/css/bootstrap.min.css" rel="stylesheet">
+            <form class="navbar-form navbar-left" action="/settings/upload" method="post" enctype="multipart/form-data" target="_parent">
+                <div class="input-group">
+                    <input type="text" class="form-control" placeholder="Description" name="desc">
+                </div>
+                <div class="input-group">
+                    <input type="text" class="form-control" placeholder="Price" name="price">
+                </div>
+                <div class="input-group">
+                    <input type="text" class="form-control" placeholder="Category" name="category">
+                </div>
+                <div>
+                    <input type="file" name="file">
+                </div>
+                <input class="btn btn-primary btn-md" type="submit" value="Upload">
+            </form>
+            <form class="navbar-form navbar-left" action="/settings/delete" method="post" enctype="multipart/form-data" target="_parent">
+                <div class="dropdown col-sm-4">
+                    <button class="btn btn-default dropdown-toggle" type="button" id="dropdownMenu1" data-toggle="dropdown" aria-haspopup="true" aria-expanded="true">
+                    Description
+                        <span class="caret"></span>
+                    </button>
+                        <ul class="dropdown-menu" aria-labelledby="dropdownMenu1">
+                            <li><a href="#">Action</a></li>
+                            <li><a href="#">Another action</a></li>
+                            <li><a href="#">Something else here</a></li>
+                            <li role="separator" class="divider"></li>
+                            <li><a href="#">Separated link</a></li>
+                        </ul>
+                    </div>
+                <div class="dropdown col-sm-4">
+                    <button class="btn btn-default dropdown-toggle" type="button" id="dropdownMenu1" data-toggle="dropdown" aria-haspopup="true" aria-expanded="true">
+                    Category
+                        <span class="caret"></span>
+                    </button>
+                        <ul class="dropdown-menu" aria-labelledby="dropdownMenu1">
+                            <li><a href="#">Action</a></li>
+                            <li><a href="#">Another action</a></li>
+                            <li><a href="#">Something else here</a></li>
+                            <li role="separator" class="divider"></li>
+                            <li><a href="#">Separated link</a></li>
+                        </ul>
+                    </div>
+                <input class="btn btn-primary btn-md" type="submit" value="Remove">
+            </form>
+</head>
+</html>
